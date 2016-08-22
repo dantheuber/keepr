@@ -11,27 +11,27 @@ function noteService($q, rootPath) {
   var db = new Datastore(rootPath + 'notes_db');
   db.loadDatabase();
 
-  // get categories 
-  svc.noteCategories = [];
-
+  svc.notes = [];
   // retrieve notes
-  svc.getNotes = function getNotes() {
-    var deferred = $q.defer();
-    db.find({}, resdef(deferred));
-    deferred.promise.catch(function (error) {
-      // good to do something with errors in service?
-    });
-    return deferred.promise;
-  };
+  var deferredNotes = $q.defer();
+  db.find({}, function (err, notes) {
+    if (err) return deferredNotes.reject(err);
+    svc.notes = notes;
+    deferredNotes.resolve();
+    console.log('retrieved notes:', notes);
+  });
+  svc.load = deferredNotes.promise;
 
   // insert a new note
   svc.insertNote = function insertNote(title, note) {
+    if (note === undefined) note = '';
     var deferred = $q.defer();
     var newNoteDoc = {
       title: title,
       note: note
     };
     db.insert(newNoteDoc, resdef(deferred));
+    deferred.promise.then(svc.notes.unshift);
     return deferred.promise;
   };
 

@@ -11,6 +11,7 @@ var app = angular
               // third party modules
               'ngMaterial',
               'hc.marked',
-              require('./core/core.module')
+              require('./core/core.module'),
+              require('./navigator/navigator.module')
             ])
             .config(require('./config'));

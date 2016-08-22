@@ -1,0 +1,30 @@
+<div class="wrapper">
+  <md-fab-toolbar md-open="nav.toolbar.isOpen" md-direction="right">
+    <md-fab-trigger>
+      <md-button aria-label="menu" clas="md-fab md-primary">
+        <md-icon class="material-icons">menu</md-icon>
+      </md-button>
+    </md-fab-trigger>
+    <md-toolbar>
+      <md-fab-actions class="md-toolbar-tools">
+        <md-button ng-click="nav.showNewNote($event)">
+          New Note
+        </md-button>
+      </md-fab-actions>
+    </md-toolbar>
+  </md-fab-toolbar>
+  <md-input-container>
+    <input type="text" name="filter"
+           ng-model="nav.searchText"
+           placeholder="Search Notes">
+  </md-input-container>
+  <!-- <md-progress-circular md-mode="indeterminate" ng-if="nav.loading"></md-progress-circular> -->
+  <!-- <md-virtual-repeat-container> -->
+  <md-list>
+    <md-list-item ng-repeat="note in nav.noteService.notes | filter:nav.searchText">
+      {{ note.title }}
+      <md-divider ng-if="!$last"></md-divider>
+    </md-list-item>
+  </md-list>
+  <!-- </md-virtual-repeat-container> -->
+</div>
