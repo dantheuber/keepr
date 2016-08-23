@@ -1,0 +1,16 @@
+<md-fab-speed-dial class="md-fling"
+                   md-open="toolbar.isOpen"
+                   md-direction="up"
+                   style="position: absolute; bottom: 0px;" ng-cloak>
+  <md-fab-trigger>
+    <md-button class="md-fab md-primary">
+      <md-icon class="material-icons">menu</md-icon>
+    </md-button>
+  </md-fab-trigger>
+  <md-fab-actions class="md-toolbar-tools">
+    <md-button class="md-fab md-primary md-raised md-mini"
+               ng-click="toolbar.showNewNote($event)">
+      <md-icon class="material-icons">library_add</md-icon>
+    </md-button>
+  </md-fab-actions>
+</md-fab-speed-dial>

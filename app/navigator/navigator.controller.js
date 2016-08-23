@@ -1,31 +1,29 @@
 'use strict';
 
 module.exports = NavigatorController;
-NavigatorController.$inject = ['$mdDialog', '$scope', 'notes'];
+NavigatorController.$inject = ['$scope', 'notes'];
 
-function NavigatorController($mdDialog, $scope, notes) {
+function NavigatorController ($scope, notes) {
   var ctrl = this;
+  ctrl.selectedIndex = -1;
   ctrl.loading = true;
-  ctrl.noteService = notes;
-  notes.load
-    .then(function() {
-      ctrl.loading = false;
-    })
-    .catch(function (err) {
-      console.log('Error loading notes:', err);
+
+  // init empty note array
+  ctrl.notes = [];
+
+  $scope.$on('notes-updated', function (e, data) {
+    ctrl.loading = false;
+    ctrl.notes = data.map(function (d) {
+      return {
+        _id: d._id,
+        title: d.title
+      };
     });
+  });
 
+  ctrl.makeActive = notes.makeActive;
 
-  ctrl.showNewNote = function(ev) {
-    // Appending dialog to document.body to cover sidenav in docs app
-    var confirm = $mdDialog.prompt()
-      .title('New Note Title')
-      .textContent('Please provide a title for your new note.')
-      .placeholder('Note Title')
-      .ariaLabel('Note Title')
-      .targetEvent(ev)
-      .ok('Okay')
-      .cancel('Cancel');
-    $mdDialog.show(confirm).then(notes.insertNote);
+  ctrl.removeNote = function removeNote(id) {
+    notes.deleteNote(id);
   };
 }

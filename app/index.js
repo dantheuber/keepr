@@ -12,6 +12,8 @@ var app = angular
               'ngMaterial',
               'hc.marked',
               require('./core/core.module'),
-              require('./navigator/navigator.module')
+              require('./navigator/navigator.module'),
+              require('./toolbar/toolbar.module'),
+              require('./editor/editor.module')
             ])
             .config(require('./config'));

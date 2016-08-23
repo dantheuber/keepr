@@ -9,13 +9,17 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   </head>
   <body ng-app="keepr">
-    <div ng-controller="AppController" class="sample" layout="row" ng-cloak>
-      <div flex style="width: 30%">
+    <toolbar></toolbar>
+    <div layout="row" style="">
+      <div flex="25">
         <navigator></navigator>
       </div>
-      <div flex>
+      <div flex="75">
         <editor></editor>
       </div>
     </div>
+    <md-icon class="material-icons" style="-webkit-app-region: drag; position: fixed; bottom: 3px; right: 3px">
+      drag_handle
+    </md-icon>
   </body>
 </html>

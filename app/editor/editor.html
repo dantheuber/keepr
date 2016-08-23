@@ -1,0 +1,17 @@
+<md-content layout="column">
+  <div ng-if="editor.isEditing">
+    <md-input-container layout="row">
+      <input flex="100" ng-model="editor.editedNote.title" aria-label="Note Title" required style="width: 100%">
+    </md-input-container>
+    <md-input-container layout="row">
+      <textarea name="name" rows="8" cols="40" ng-model="editor.editedNote.note"></textarea>
+    </md-input-container>
+  </div>
+  <div ng-if="!editor.isEditing">
+    <h3>{{ ::editor.originalNote.title }}</h3>
+    <div marked="editor.originalNote.note"></div>
+    <md-button ng-click="editor.startEditing()">
+      <md-icon class="material-icons">edit</md-icon>
+    </md-button>
+  </div>
+</md-content>

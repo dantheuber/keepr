@@ -1,30 +1,21 @@
 <div class="wrapper">
-  <md-fab-toolbar md-open="nav.toolbar.isOpen" md-direction="right">
-    <md-fab-trigger>
-      <md-button aria-label="menu" clas="md-fab md-primary">
-        <md-icon class="material-icons">menu</md-icon>
-      </md-button>
-    </md-fab-trigger>
-    <md-toolbar>
-      <md-fab-actions class="md-toolbar-tools">
-        <md-button ng-click="nav.showNewNote($event)">
-          New Note
-        </md-button>
-      </md-fab-actions>
-    </md-toolbar>
-  </md-fab-toolbar>
-  <md-input-container>
+  <md-input-container style="margin-bottom: 0; padding: 0">
     <input type="text" name="filter"
-           ng-model="nav.searchText"
+           ng-model="toolbar.searchText"
            placeholder="Search Notes">
   </md-input-container>
-  <!-- <md-progress-circular md-mode="indeterminate" ng-if="nav.loading"></md-progress-circular> -->
-  <!-- <md-virtual-repeat-container> -->
-  <md-list>
-    <md-list-item ng-repeat="note in nav.noteService.notes | filter:nav.searchText">
-      {{ note.title }}
+  <md-progress-circular md-mode="indeterminate" ng-if="nav.loading"></md-progress-circular>
+  <md-list style="margin-top: 0; padding: 0">
+    <md-list-item class="secondary-button-padding slide"
+                  ng-repeat="note in nav.notes | filter:nav.searchText">
+      <a ng-click="nav.makeActive(note._id)">{{ note.title }}</a>
+      <md-button class="md-fab md-mini md-primary md-secondary"
+                 ng-click="nav.removeNote(note._id)">
+        <md-icon class="material-icons">
+          delete
+        </md-icon>
+      </md-button>
       <md-divider ng-if="!$last"></md-divider>
     </md-list-item>
   </md-list>
-  <!-- </md-virtual-repeat-container> -->
 </div>

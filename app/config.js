@@ -1,8 +1,9 @@
 'use strict';
 
 module.exports = appConfig;
-appConfig.$inject = [];
+appConfig.$inject = ['$mdThemingProvider'];
 
-function appConfig() {
-  
+function appConfig($mdThemingProvider) {
+  $mdThemingProvider.theme('default')
+    .dark();
 }
