@@ -16,7 +16,8 @@ function NavigatorController ($scope, notes) {
     ctrl.notes = data.map(function (d) {
       return {
         _id: d._id,
-        title: d.title
+        title: d.title,
+        updated: d.updated
       };
     });
   });

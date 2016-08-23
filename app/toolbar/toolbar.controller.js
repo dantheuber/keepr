@@ -9,9 +9,9 @@ function ToolbarController($mdDialog, notes) {
 
   ctrl.showNewNote = function showNewNote(ev) {
     var confirm = $mdDialog.prompt()
-      .title('New Note Title')
+      .title('Create new note')
       .textContent('Please provide a title for your new note.')
-      .ariaLabel('Note Title')
+      .ariaLabel('Create new note')
       .targetEvent(ev)
       .ok('Okay')
       .cancel('Cancel');
@@ -19,4 +19,14 @@ function ToolbarController($mdDialog, notes) {
     $mdDialog.show(confirm).then(notes.insertNote);
   };
 
+  ctrl.deleteAllNotes = function deleteAllNotes(ev) {
+    var confirm = $mdDialog.confirm()
+      .title('Delete all notes?')
+      .textContent('This action is not reversable.')
+      .ariaLabel('Delete all notes')
+      .targetEvent(ev)
+      .ok('Yes, delete everything.')
+      .cancel('NO!');
+    $mdDialog.show(confirm).then(notes.deleteAllNotes);
+  }
 }

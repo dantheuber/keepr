@@ -1,21 +1,37 @@
 <div class="wrapper">
-  <md-input-container style="margin-bottom: 0; padding: 0">
-    <input type="text" name="filter"
-           ng-model="toolbar.searchText"
-           placeholder="Search Notes">
-  </md-input-container>
-  <md-progress-circular md-mode="indeterminate" ng-if="nav.loading"></md-progress-circular>
-  <md-list style="margin-top: 0; padding: 0">
-    <md-list-item class="secondary-button-padding slide"
-                  ng-repeat="note in nav.notes | filter:nav.searchText">
-      <a ng-click="nav.makeActive(note._id)">{{ note.title }}</a>
-      <md-button class="md-fab md-mini md-primary md-secondary"
-                 ng-click="nav.removeNote(note._id)">
-        <md-icon class="material-icons">
-          delete
-        </md-icon>
-      </md-button>
-      <md-divider ng-if="!$last"></md-divider>
-    </md-list-item>
-  </md-list>
+  <md-toolbar>
+    <div class="md-toolbar-tools" layout="row">
+      <div flex="100">
+        <md-input-container>
+          <input type="text" name="filter"
+                 ng-model="nav.searchText"
+                 placeholder="Search Notes">
+        </md-input-container>
+      </div>
+    </div>
+  </md-toolbar>
+  <md-content>
+    <md-list>
+      <md-list-item class="secondary-button-padding slide md-3-line"
+                    ng-repeat="note in nav.notes | filter:nav.searchText"
+                    ng-click="nav.makeActive(note._id)">
+        <div class="md-list-item-text">
+          <h3>{{ note.title }}</h3>
+          <p>
+            <time am-time-ago="note.updated" title="{{ note.updated | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}"></time>
+          </p>
+        </div>
+        <md-button class="md-accent md-secondary"
+                   ng-click="nav.removeNote(note._id)">
+          <md-tooltip md-direction="down">
+            Delete
+          </md-tooltip>
+          <md-icon class="material-icons">
+            delete
+          </md-icon>
+        </md-button>
+        <md-divider ng-if="!$last"></md-divider>
+      </md-list-item>
+    </md-list>
+  </md-content>
 </div>
