@@ -10,10 +10,12 @@
   <md-fab-actions class="md-toolbar-tools">
     <md-button class="md-fab md-primary md-raised md-mini"
                ng-click="toolbar.showNewNote($event)">
+      <md-tooltip md-direction="right">Create New</md-tooltip>
       <md-icon class="material-icons">library_add</md-icon>
     </md-button>
     <md-button class="md-fab md-warn md-raised md-mini"
                ng-click="toolbar.deleteAllNotes($event)">
+      <md-tooltip md-direction="right">Delete All Notes</md-tooltip>
       <md-icon class="material-icons">delete</md-icon>
     </md-button>
   </md-fab-actions>
