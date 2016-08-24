@@ -49,10 +49,4 @@ function EditorController($q, $scope, $mdDialog, notes) {
       });
     }
   });
-
-  // $scope.$on('selected-note', function (e, data) {
-  //   console.log('selected note', data);
-  //   ctrl.editedNote = data;
-  //   ctrl.originalNote = data;
-  // });
 }
