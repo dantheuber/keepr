@@ -21,11 +21,30 @@ function EditorController($q, $scope, $mdDialog, notes) {
         ctrl.isEditing = false;
       });
   };
+  // must get updated title and remove if deleted
+  var noteRemoved = false;
+  $scope.$on('notes-updated', function (e, data) {
+    var ourNote = data.filter(function (note) {
+      return note._id === ctrl.editedNote._id;
+    })[0] || null;
+    console.log(ourNote);
+
+    if (!ourNote) {
+      noteRemoved = true;
+      ctrl.originalNote = ctrl.editedNote = {};
+      return;
+    }
+    ctrl.originalNote.title = ctrl.editedNote.title = ourNote.title;
+  });
 
   $scope.$watch(function () { return notes.selectedNote; }, function (nv, ov) {
     if (nv) {
       var deferred = $q.defer();
-      if (ov.note !== ctrl.editedNote.note
+      if (noteRemoved) {
+        noteRemoved = false;
+        deferred.resolve();
+      }
+      else if (ov.note !== ctrl.editedNote.note
       || ov.title !== ctrl.editedNote.title) {
         var confirm = $mdDialog.confirm()
           .title('Save Changes?')
@@ -40,7 +59,8 @@ function EditorController($q, $scope, $mdDialog, notes) {
                  }, function () {
                    deferred.resolve();
                  });
-      } else {
+      }
+      else {
         deferred.resolve();
       }
       deferred.promise.then(function() {

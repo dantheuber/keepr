@@ -16,21 +16,20 @@
   </md-toolbar>
   <md-list>
     <md-list-item ng-repeat="note in nav.notes | filter:nav.searchText"
+                  class="animate"
                   ng-click="nav.makeActive(note._id)"
                   ng-class="{ 'selected-note': nav.activeId === note._id }"
-                  style="-webkit-app-region:no-drag">
+                  style="-webkit-app-region:no-drag; height: 50px;">
       <md-item-content md-ink-ripple layout="row" layout-align="start center">
         <div layout="column" layout-align="left">
-          <span style="margin-bottom: -15px">{{ note.title }}</span>
+          <span style="margin-bottom: -15px; max-height:35px; overflow:hidden">{{ note.title }}</span>
           <time style="font-size: small; color:rgba(100,100,100,.9)" am-time-ago="note.updated" title="{{ note.updated | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}"></time>
           <md-fab-speed-dial class="md-scale"
                              md-open="note.menuOpen"
                              md-direction="left"
                              style="top: 0; right: 0; position: absolute">
             <md-fab-trigger>
-              <!-- <md-button class="md-fab md-primary md-mini"> -->
                 <md-icon class="material-icons">more_horiz</md-icon>
-              <!-- </md-button> -->
             </md-fab-trigger>
             <md-fab-actions class="md-toolbar-tools">
               <md-button class="md-accent md-fab md-raised md-mini" ng-click="nav.removeNote($event, note._id)">
