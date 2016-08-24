@@ -1,39 +1,56 @@
-<md-sidenav layout="column" class="md-sidenav-left">
-  <md-toolbar>
+<md-sidenav md-is-locked-open="true">
+  <md-toolbar class="md-hue-2">
     <div class="md-toolbar-tools" layout="row">
-      <div flex="100">
-        <md-input-container>
-          <input type="text" name="filter"
-                 ng-model="nav.searchText"
-                 placeholder="Search Notes">
-        </md-input-container>
-      </div>
+      <md-input-container md-no-float class="md-accent" flex>
+        <input type="text" name="filter"
+                ng-model="nav.searchText"
+                aria-label="Note Search"
+                placeholder="Search Here">
+      </md-input-container>
     </div>
   </md-toolbar>
   <md-list>
-    <md-item ng-repeat="note in nav.notes | filter:nav.searchText"
-             ng-click="nav.makeActive(note._id)">
-      <a>
-        <md-item-content md-ink-ripple layout="row" layout-align="start center">
-          <div class="inset">
-            <md-icon class="material-icons">file</md-icon>
-          </div>
-          <div class="inset">
-            {{ note.title }}
-            <time am-time-ago="note.updated" title="{{ note.updated | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}"></time>
-          </div>
-        </md-item-content>
-      </a>
-      <md-button class="md-accent md-secondary"
-                 ng-click="nav.removeNote(note._id)">
-        <md-tooltip md-direction="down">
-          Delete
-        </md-tooltip>
-        <md-icon class="material-icons">
-          delete
-        </md-icon>
-      </md-button>
+    <md-list-item ng-repeat="note in nav.notes | filter:nav.searchText"
+                  ng-click="nav.makeActive(note._id)">
+      <md-item-content md-ink-ripple layout="row" layout-align="start center">
+        <!-- <span class="inset">
+          <md-icon class="material-icons">assignment</md-icon>
+        </span> -->
+        <div layout="column" layout-align="left">
+          <span style="margin-bottom: -15px">{{ note.title }}</span>
+          <time style="font-size: small; color:rgba(100,100,100,.9)" am-time-ago="note.updated" title="{{ note.updated | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}"></time>
+          <md-fab-speed-dial class="md-scale"
+                             md-open="note.menuOpen"
+                             md-direction="left"
+                             style="top: -5px; right: 0; position: absolute">
+            <md-fab-trigger>
+              <!-- <md-button class="md-fab md-primary md-mini"> -->
+                <md-icon class="material-icons">more_vert</md-icon>
+              <!-- </md-button> -->
+            </md-fab-trigger>
+            <md-fab-actions class="md-toolbar-tools">
+              <md-button class="md-accent md-fab md-raised md-mini" ng-click="nav.removeNote(note._id)">
+                <md-tooltip md-direction="down">Delete</md-tooltip>
+                <md-icon class="material-icons">delete</md-icon>
+              </md-button>
+              <md-button class="md-fab md-mini md-raised" ng-click="nav.renameNote(note._id)">
+                <md-tooltip md-direction="down">Rename</md-tooltip>
+                <md-icon class="material-icons">edit</md-icon>
+              </md-button>
+            </md-fab-actions>
+          </md-fab-speed-dial>
+        </div>
+        <!-- <md-button class="md-accent md-secondary"
+                    ng-click="nav.removeNote(note._id)">
+          <md-tooltip md-direction="down">
+            Delete
+          </md-tooltip>
+          <md-icon class="material-icons">
+            delete
+          </md-icon>
+        </md-button> -->
+      </md-item-content>
       <md-divider ng-if="!$last"></md-divider>
-    </md-item>
+    </md-list-item>
   </md-list>
 </md-sidenav>
