@@ -15,6 +15,7 @@
   </div>
   <md-input-container ng-if="editor.isEditing" style="width:100%; height:100%">
     <textarea name="name"
+              placeholder="{{ editor.editedNote.note === '' ? 'Add some content!': 'Editing Note:'}}"
               ng-model="editor.editedNote.note"></textarea>
   </md-input-container>
   <div ng-if="!editor.isEditing" marked="editor.originalNote.note"></div>

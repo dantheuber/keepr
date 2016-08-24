@@ -16,7 +16,7 @@ function noteService($rootScope, $q, rootPath) {
 
   svc.notes = [];
   // retrieve notes
-  db.find({}, function (err, notes) {
+  db.find({}).sort({updated: -1}).exec(function (err, notes) {
     if (err) return deferredNotes.reject(err);
     svc.notes = notes;
     broadcastUpdate();
