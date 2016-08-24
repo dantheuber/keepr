@@ -11,3 +11,19 @@ code {
 ::-webkit-scrollbar {
     display: none;
 }
+.ng-enter {
+  -webkit-transition: 1s linear all;
+  transition: 1s linear all;
+  opacity: 0;
+}
+.ng-enter-active {
+  opacity: 1;
+}
+.ng-leave {
+  -webkit-transition: 1s linear all;
+  transition: 1s linear all;
+  opacity: 1;
+}
+.ng-leave-active {
+  opacity: 0;
+}
