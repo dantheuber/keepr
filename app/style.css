@@ -2,3 +2,10 @@ code {
   display: block;
   background-color: rgba(0,0,0,.3);
 }
+.selected-note {
+  /*background-color: red !important;*/
+  background-color: rgb(48,48,48);
+}
+::-webkit-scrollbar {
+    display: none;
+}

@@ -7,6 +7,7 @@ function NavigatorController ($mdDialog, $scope, notes) {
   var ctrl = this;
   ctrl.selectedIndex = -1;
   ctrl.loading = true;
+  ctrl.activeId = null;
 
   // init empty note array
   ctrl.notes = [];
@@ -24,7 +25,10 @@ function NavigatorController ($mdDialog, $scope, notes) {
   });
 
   // activate note
-  ctrl.makeActive = notes.makeActive;
+  ctrl.makeActive = function (id) {
+    ctrl.activeId = id;
+    notes.makeActive(id);
+  };
 
   // remove note
   ctrl.removeNote = function removeNote(id) {
@@ -41,7 +45,7 @@ function NavigatorController ($mdDialog, $scope, notes) {
       .ok('Yes, delete everything.')
       .cancel('NO!');
     $mdDialog.show(confirm).then(notes.deleteAllNotes);
-  }
+  };
 
   // create new note
   ctrl.showNewNote = function showNewNote(ev) {
