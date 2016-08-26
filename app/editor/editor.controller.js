@@ -27,7 +27,6 @@ function EditorController($q, $scope, $mdDialog, notes) {
     var ourNote = data.filter(function (note) {
       return note._id === ctrl.editedNote._id;
     })[0] || null;
-    console.log(ourNote);
 
     if (!ourNote) {
       noteRemoved = true;
@@ -45,7 +44,7 @@ function EditorController($q, $scope, $mdDialog, notes) {
         deferred.resolve();
       }
       else if (ov.note !== ctrl.editedNote.note
-      || ov.title !== ctrl.editedNote.title) {
+           || ov.title !== ctrl.editedNote.title) {
         var confirm = $mdDialog.confirm()
           .title('Save Changes?')
           .textContent('You\'ve made changes to the current note without saving.')
