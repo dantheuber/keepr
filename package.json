@@ -1,6 +1,6 @@
 {
   "name": "keepr",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A markdown supporting note pad for whatever things you might keep.",
   "main": "index.js",
   "scripts": {
