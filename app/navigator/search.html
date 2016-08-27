@@ -6,6 +6,7 @@
               focus-me="focus-search"
               style="top:0; position: absolute"
               ng-model="nav.searchText"
+              ng-model-options="{ debounce: 300 }"
               aria-label="Note Search"
               placeholder="Filter Here">
     </md-input-container>

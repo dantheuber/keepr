@@ -7,6 +7,19 @@ function NavigatorController ($mdDialog, $rootScope, $scope, hotkeys, notes) {
   var ctrl = this;
   ctrl.loading = true;
   ctrl.activeId = null;
+  ctrl.searchText = '';
+
+  $scope.$watch(function () {
+    return ctrl.searchText;
+  }, function (nv) {
+    if (nv !== '') {
+      ctrl.notes = notes.notes.filter(function (note) {
+        return note.title.toLowerCase().indexOf(nv.toLowerCase()) !== -1;
+      }).map(mapNotes);
+    } else {
+      ctrl.notes = notes.notes.map(mapNotes);
+    }
+  });
 
   // init empty note array
   ctrl.notes = [];
@@ -14,15 +27,21 @@ function NavigatorController ($mdDialog, $rootScope, $scope, hotkeys, notes) {
   var selectFirst = true;
   $scope.$on('notes-updated', function (e, data) {
     ctrl.loading = false;
-    ctrl.notes = data.map(function (note) {
-      note.menuOpen = false;
-      return note;
-    });
+    ctrl.notes = data.map(mapNotes);
     if (selectFirst) {
       ctrl.makeActive(ctrl.notes[0]._id);
       selectFirst = false;
     }
   });
+
+  function mapNotes(note) {
+    return {
+      _id: note._id,
+      title: note.title,
+      menuOpen: false,
+      updated: note.updated
+    };
+  }
 
   // activate note
   ctrl.makeActive = function (id) {

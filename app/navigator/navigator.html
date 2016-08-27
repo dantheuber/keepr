@@ -1,7 +1,7 @@
 <md-sidenav md-is-locked-open="true" style="-webkit-app-region:drag">
   <search-bar></search-bar>
   <md-list>
-    <md-list-item ng-repeat="note in nav.notes | filter:nav.searchText"
+    <md-list-item ng-repeat="note in nav.notes"
                   class="animate"
                   ng-click="nav.makeActive(note._id)"
                   ng-class="{ 'selected-note': nav.activeId === note._id }"
