@@ -10,9 +10,8 @@ function focusMe($timeout) {
 
           if (attrs.focusMe !== undefined) {
             scope.$on(attrs.focusMe, focus);
-          } else {
-            $timeout(focus);
           }
+          $timeout(focus);
 
           function focus() {
             element[0].focus();

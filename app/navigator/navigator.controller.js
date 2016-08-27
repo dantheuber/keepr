@@ -104,11 +104,13 @@ function NavigatorController ($mdDialog, $rootScope, $scope, hotkeys, notes) {
     .add({
       combo: 'ctrl+up',
       description: 'Select previous note',
+      allowIn: ['INPUT'],
       callback: selectPrevious
     })
     .add({
       combo: 'ctrl+down',
       description: 'Select next note',
+      allowIn: ['INPUT'],
       callback: selectNext
     });
 

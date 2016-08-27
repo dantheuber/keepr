@@ -33,6 +33,7 @@ function EditorController($q, $scope, $mdDialog, hotkeys, notes) {
     .add({
       combo: 'ctrl+e',
       description: 'Start editing the current note',
+      allowIn: ['INPUT'],
       callback: ctrl.startEditing
     });
 
