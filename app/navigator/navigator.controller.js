@@ -1,11 +1,10 @@
 'use strict';
 
 module.exports = NavigatorController;
-NavigatorController.$inject = ['$mdDialog', '$scope', 'notes'];
+NavigatorController.$inject = ['$mdDialog', '$rootScope', '$scope', 'hotkeys', 'notes'];
 
-function NavigatorController ($mdDialog, $scope, notes) {
+function NavigatorController ($mdDialog, $rootScope, $scope, hotkeys, notes) {
   var ctrl = this;
-  ctrl.selectedIndex = -1;
   ctrl.loading = true;
   ctrl.activeId = null;
 
@@ -84,4 +83,64 @@ function NavigatorController ($mdDialog, $scope, notes) {
     selectFirst = true;
     $mdDialog.show(confirm).then(notes.insertNote);
   };
+
+  // register hotkeys
+  ctrl.focusSearch = function () {
+    $rootScope.$broadcast('focus-search');
+  };
+
+  hotkeys.bindTo($scope)
+    .add({
+      combo: 'ctrl+n',
+      description: 'Create a new note',
+      allowIn: ['INPUT', 'TEXTAREA'],
+      callback: ctrl.showNewNote
+    })
+    .add({
+      combo: 'ctrl+space',
+      description: 'Jump to search area',
+      callback: ctrl.focusSearch
+    })
+    .add({
+      combo: 'ctrl+up',
+      description: 'Select previous note',
+      callback: selectPrevious
+    })
+    .add({
+      combo: 'ctrl+down',
+      description: 'Select next note',
+      callback: selectNext
+    });
+
+  function selectPrevious() {
+    var selectIndex;
+    for (var i = 0; i <= ctrl.notes.length - 1; i++) {
+      var temp = ctrl.notes[i];
+      if (ctrl.activeId === temp._id) {
+        selectIndex = i - 1;
+        if (i === 0) {
+          selectIndex = ctrl.notes.length - 1;
+        }
+        break;
+      }
+    }
+    var toActiveId = ctrl.notes[selectIndex]._id;
+    ctrl.makeActive(toActiveId);
+  }
+
+  function selectNext() {
+    var selectIndex;
+    for (var i = 0; i <= ctrl.notes.length - 1; i++) {
+      var temp = ctrl.notes[i];
+      if (ctrl.activeId === temp._id) {
+        selectIndex = i + 1;
+        if (i === ctrl.notes.length - 1) {
+          selectIndex = 0;
+        }
+        break;
+      }
+    }
+    var toActiveId = ctrl.notes[selectIndex]._id;
+    ctrl.makeActive(toActiveId);
+  }
 }

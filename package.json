@@ -1,6 +1,6 @@
 {
   "name": "keepr",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A markdown supporting note pad for whatever things you might keep.",
   "main": "index.js",
   "scripts": {
@@ -24,6 +24,7 @@
     "angular": "^1.5.8",
     "angular-animate": "^1.5.8",
     "angular-aria": "^1.5.8",
+    "angular-hotkeys": "^1.7.0",
     "angular-marked": "^1.2.2",
     "angular-material": "^1.1.0",
     "angular-moment": "^0.10.3",

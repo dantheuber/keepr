@@ -2,6 +2,7 @@
 
 var angular = require('angular');
 
+require('angular-hotkeys');
 require('angular-material');
 require('angular-moment');
 require('angular-marked');
@@ -12,6 +13,7 @@ var app = angular
               'ngMaterial',
               'angularMoment',
               'hc.marked',
+              'cfp.hotkeys',
               require('./core/core.module'),
               require('./navigator/navigator.module'),
               require('./editor/editor.module')

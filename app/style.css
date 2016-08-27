@@ -4,6 +4,18 @@ code {
   overflow-y: scroll;
   background-color: rgba(0,0,0,.3);
 }
+
+.editor {
+  width: 100%;
+  height: 100%;
+  border-width: 0px;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  background-color: rgb(48,48,48);
+  color: white;
+}
+
 .selected-note {
   /*background-color: red !important;*/
   background-color: rgb(48,48,48);
