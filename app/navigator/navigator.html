@@ -1,21 +1,5 @@
 <md-sidenav md-is-locked-open="true" style="-webkit-app-region:drag">
-  <md-toolbar>
-    <div class="md-toolbar-tools" layout="row" style="-webkit-app-region:no-drag">
-      <md-input-container md-theme="input" class="md-accent" flex>
-        <label>&nbsp;</label>
-        <input type="text" name="filter"
-                focus-me="focus-search"
-                style="top:0; position: absolute"
-                ng-model="nav.searchText"
-                aria-label="Note Search"
-                placeholder="Filter Here">
-      </md-input-container>
-      <md-button class="md-fab md-mini md-hue-2 md-primary" ng-click="nav.showNewNote($event)">
-        <md-tooltip md-direction="down">Create New</md-tooltip>
-        <md-icon class="material-icons">note_add</md-icon>
-      </md-button>
-    </div>
-  </md-toolbar>
+  <search-bar></search-bar>
   <md-list>
     <md-list-item ng-repeat="note in nav.notes | filter:nav.searchText"
                   class="animate"

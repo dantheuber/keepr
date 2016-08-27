@@ -85,21 +85,12 @@ function NavigatorController ($mdDialog, $rootScope, $scope, hotkeys, notes) {
   };
 
   // register hotkeys
-  ctrl.focusSearch = function () {
-    $rootScope.$broadcast('focus-search');
-  };
-
   hotkeys.bindTo($scope)
     .add({
       combo: 'ctrl+n',
       description: 'Create a new note',
       allowIn: ['INPUT', 'TEXTAREA'],
       callback: ctrl.showNewNote
-    })
-    .add({
-      combo: 'ctrl+space',
-      description: 'Jump to search area',
-      callback: ctrl.focusSearch
     })
     .add({
       combo: 'ctrl+up',
