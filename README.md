@@ -8,3 +8,7 @@ A simple note pad that supports markdown, for notes or whatever!
 4. Then, `npm start`
 
 You should be running the current build at this point.
+
+
+### now supports hotkeys!
+Type `?` to see the cheatsheet. Uses https://github.com/chieffancypants/angular-hotkeys
