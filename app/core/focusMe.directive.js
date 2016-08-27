@@ -6,10 +6,17 @@ focusMe.$inject = ['$timeout'];
 function focusMe($timeout) {
     return {
         restrict: 'A',
-        link: function (scope, element) {
-            $timeout(function () {
-              element[0].focus();
-            });
+        link: function (scope, element, attrs) {
+
+          if (attrs.focusMe !== undefined) {
+            scope.$on(attrs.focusMe, focus);
+          } else {
+            $timeout(focus);
+          }
+
+          function focus() {
+            element[0].focus();
+          }
         }
     };
 }

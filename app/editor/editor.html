@@ -13,11 +13,10 @@
       <md-icon class="material-icons">edit</md-icon>
     </md-button>
   </div>
-  <md-input-container ng-if="editor.isEditing" style="width: 100%; height: 100%; position: relative">
-    <textarea name="name"
-              focus-me
-              placeholder="{{ editor.editedNote.note === '' ? 'Add some content!': 'Editing Note:'}}"
-              ng-model="editor.editedNote.note"></textarea>
-  </md-input-container>
+  <textarea ng-if="editor.isEditing"
+            focus-me
+            class="editor"
+            placeholder="{{ editor.editedNote.note === '' ? 'Add some content!': 'Editing Note:'}}"
+            ng-model="editor.editedNote.note"></textarea>
   <div ng-if="!editor.isEditing" marked="editor.originalNote.note"></div>
 </md-content>

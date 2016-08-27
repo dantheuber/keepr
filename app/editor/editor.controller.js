@@ -1,9 +1,9 @@
 'use strict';
 var copy = require('angular').copy;
 module.exports = EditorController;
-EditorController.$inject = ['$q', '$scope', '$mdDialog', 'notes'];
+EditorController.$inject = ['$q', '$scope', '$mdDialog', 'hotkeys', 'notes'];
 
-function EditorController($q, $scope, $mdDialog, notes) {
+function EditorController($q, $scope, $mdDialog, hotkeys, notes) {
   var ctrl = this;
 
   ctrl.editedNote = {};
@@ -21,6 +21,21 @@ function EditorController($q, $scope, $mdDialog, notes) {
         ctrl.isEditing = false;
       });
   };
+
+  // register hotkeys
+  hotkeys.bindTo($scope)
+    .add({
+      combo: 'ctrl+s',
+      description: 'Save changes when editing',
+      allowIn: ['TEXTAREA'],
+      callback: ctrl.saveChanges
+    })
+    .add({
+      combo: 'ctrl+e',
+      description: 'Start editing the current note',
+      callback: ctrl.startEditing
+    });
+
   // must get updated title and remove if deleted
   var noteRemoved = false;
   $scope.$on('notes-updated', function (e, data) {
@@ -63,8 +78,9 @@ function EditorController($q, $scope, $mdDialog, notes) {
         deferred.resolve();
       }
       deferred.promise.then(function() {
+        console.log(ctrl.originalNote);
         ctrl.originalNote = ctrl.editedNote = copy(nv);
-        ctrl.isEditing = false;
+        ctrl.isEditing = ctrl.originalNote.note === '';
       });
     }
   });
